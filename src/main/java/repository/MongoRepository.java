@@ -1,14 +1,12 @@
 package repository;
 
-
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entity.ResultsStatistics;
 import org.bson.Document;
-
-import java.util.HashMap;
+import java.util.Map;
 
 public class MongoRepository {
     private static final String CONNECTION_STRING = "mongodb+srv://SimpleUser:098098@cluster0.bf4he.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
@@ -25,7 +23,7 @@ public class MongoRepository {
         statisticsCollection = database.getCollection(COLLECTION_NAME);
     }
 
-    public ResultsStatistics saveToDataBase(HashMap<String, Integer> mapWords, String urlWebPage) {
+    public ResultsStatistics saveToDataBase(Map<String, Integer> mapWords, String urlWebPage) {
         ResultsStatistics resultsStatistics = new ResultsStatistics(urlWebPage, mapWords);
         saveResult(resultsStatistics);
         return resultsStatistics;

@@ -3,19 +3,17 @@ package entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.System.lineSeparator;
-
 
 public class ResultsStatistics {
     String date;
     String time;
     String webPage;
-    HashMap<String, Integer> wordStatistic;
+    Map<String, Integer> wordStatistic;
 
-
-    public ResultsStatistics(String webPage, HashMap<String, Integer> wordStatistic) {
+    public ResultsStatistics(String webPage, Map<String, Integer> wordStatistic) {
         this.date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yy"));
         this.time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH-mm-ss"));
         this.webPage = webPage;
@@ -34,7 +32,7 @@ public class ResultsStatistics {
         return webPage;
     }
 
-    public HashMap<String, Integer> getWordStatistic() {
+    public Map<String, Integer> getWordStatistic() {
         return wordStatistic;
     }
 
@@ -56,10 +54,14 @@ public class ResultsStatistics {
         if (wordStatistic == null){
             return sb.toString();
         }
-        wordStatistic.forEach((key, val) -> sb.append(lineSeparator())
-                .append(key)
-                .append(" - ")
-                .append(val));
+        for (Map.Entry<String, Integer> entry : wordStatistic.entrySet()) {
+            String key = entry.getKey();
+            Integer val = entry.getValue();
+            sb.append(lineSeparator())
+                    .append(key)
+                    .append(" - ")
+                    .append(val);
+        }
         return sb.toString();
     }
 }
